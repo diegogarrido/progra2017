@@ -1,0 +1,19 @@
+﻿<?xml version="1.0"?>
+<course>
+ <name id="csci_2962">Programming XML in Java</name>
+ <teacher id="di">Diego Ipina</teacher>
+ <student id="ua">
+ <name>Usue Artaza</name>
+ <hw1>30</hw1>
+ <hw2>70</hw2>
+ <project>80</project>
+ <final>85</final>
+ </student>
+ <student id="iu">
+ <name>Inigo Urrutia</name>
+ <hw1>80</hw1>
+ <hw2>90</hw2>
+ <project>100</project>
+ <final>40</final>
+ </student>
+</course> 
