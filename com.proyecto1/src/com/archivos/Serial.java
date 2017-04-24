@@ -14,14 +14,16 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+/**
+ * Clase administradora de datos
+ * @author Diego
+ */
 public class Serial {
 
     Gson gson = new Gson();
 
     /**
-     * Serialziar un objeto y guardarlo como json para ser utilizado por el
-     * programa
-     *
+     * Serialziar un objeto y guardarlo como json para ser utilizado por el programa
      * @param ob Un objeto cualquiera
      * @param archivo Nombre con el que guardar el archivo
      * @throws IOException
@@ -36,7 +38,6 @@ public class Serial {
 
     /**
      * Transformar un archivo json a xml para ser utilizado en los reportes
-     *
      * @param ob Clase a guardar
      * @param archivo Nombre del archivo
      * @throws JSONException
@@ -52,7 +53,6 @@ public class Serial {
 
     /**
      * Cargar y materializar un objeto a partir de datos guardados como json
-     *
      * @param aClass Tipo de objeto que se va a construir
      * @param archivo Nombre del archivo a cargar
      * @return Un objeto del tipo entregado con los datos del json leído
@@ -63,6 +63,13 @@ public class Serial {
         return obj;
     }
 
+    /**
+     * Cargar un xml y transformarlo a Word con todos los datos del curso
+     * @param archivo String con la ruta y nombre del archivo xml a cargar
+     * @throws FileNotFoundException
+     * @throws TransformerConfigurationException
+     * @throws TransformerException
+     */
     public void planificacionWord(String archivo) throws FileNotFoundException, TransformerConfigurationException, TransformerException {
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Source xslDoc = new StreamSource("archivos/planificacionword.xsl");
@@ -74,6 +81,13 @@ public class Serial {
         trasform.transform(xmlDoc, new StreamResult(docFile));
     }
 
+    /**
+     * Cargar un xml y transformarlo a Html con todos los datos del curso
+     * @param archivo String con la ruta y nombre del archivo xml a cargar
+     * @throws FileNotFoundException
+     * @throws TransformerConfigurationException
+     * @throws TransformerException
+     */
     public void planificacionHtml(String archivo) throws FileNotFoundException, TransformerConfigurationException, TransformerException {
         TransformerFactory tFactory = TransformerFactory.newInstance();
 
@@ -87,6 +101,13 @@ public class Serial {
         trasform.transform(xmlDoc, new StreamResult(docFile));
     }
 
+    /**
+     * Cargar un xml y transformarlo a Excel con todos los datos del curso
+     * @param archivo String con la ruta y nombre del archivo xml a cargar
+     * @throws FileNotFoundException
+     * @throws TransformerConfigurationException
+     * @throws TransformerException
+     */
     public void planificacionExcel(String archivo) throws FileNotFoundException, TransformerConfigurationException, TransformerException {
         TransformerFactory tFactory = TransformerFactory.newInstance();
 
@@ -100,6 +121,14 @@ public class Serial {
         trasform.transform(xmlDoc, new StreamResult(docFile));
     }
 
+    /**
+     * Cargar un xml y transformarlo a Word con los datos de la asignatura que imparte cierto Profesor
+     * @param archivo String con la ruta y nombre del archivo xml a cargar
+     * @param nombre Nombre del Profesor
+     * @throws FileNotFoundException
+     * @throws TransformerConfigurationException
+     * @throws TransformerException
+     */
     public void asignaturaWord(String archivo,String nombre) throws FileNotFoundException, TransformerConfigurationException, TransformerException {
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Source xslDoc = new StreamSource("archivos/asignaturaword.xsl");
@@ -111,6 +140,14 @@ public class Serial {
         trasform.transform(xmlDoc, new StreamResult(docFile));
     }
     
+    /**
+     * Cargar un xml y transformarlo a Html con los datos de la asignatura que imparte cierto Profesor
+     * @param archivo String con la ruta y nombre del archivo xml a cargar
+     * @param nombre Nombre del Profesor
+     * @throws FileNotFoundException
+     * @throws TransformerConfigurationException
+     * @throws TransformerException
+     */
     public void asignaturaHtml(String archivo,String nombre) throws FileNotFoundException, TransformerConfigurationException, TransformerException {
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Source xslDoc = new StreamSource("archivos/asignaturahtml.xsl");
@@ -122,6 +159,14 @@ public class Serial {
         trasform.transform(xmlDoc, new StreamResult(docFile));
     }
     
+    /**
+     * Cargar un xml y transformarlo a Excel con los datos de la asignatura que imparte cierto Profesor
+     * @param archivo String con la ruta y nombre del archivo xml a cargar
+     * @param nombre Nombre del Profesor
+     * @throws FileNotFoundException
+     * @throws TransformerConfigurationException
+     * @throws TransformerException
+     */
     public void asignaturaExcel(String archivo,String nombre) throws FileNotFoundException, TransformerConfigurationException, TransformerException {
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Source xslDoc = new StreamSource("archivos/asignaturaexcel.xsl");
@@ -133,6 +178,14 @@ public class Serial {
         trasform.transform(xmlDoc, new StreamResult(docFile));
     }
     
+    /**
+     * Cargar un xml y transformarlo a Word con los porcentajes de notas y Asistencia de cierto alumno
+     * @param archivo String con la ruta y nombre del archivo xml a cargar
+     * @param nombre Nombre del Alumno
+     * @throws FileNotFoundException
+     * @throws TransformerConfigurationException
+     * @throws TransformerException
+     */
     public void porcentajesWord(String archivo,String nombre) throws FileNotFoundException, TransformerConfigurationException, TransformerException {
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Source xslDoc = new StreamSource("archivos/asignaturaword.xsl");
@@ -144,6 +197,14 @@ public class Serial {
         trasform.transform(xmlDoc, new StreamResult(docFile));
     }
     
+    /**
+     * Cargar un xml y transformarlo a Html con los porcentajes de notas y Asistencia de cierto alumno
+     * @param archivo String con la ruta y nombre del archivo xml a cargar
+     * @param nombre Nombre del Alumno
+     * @throws FileNotFoundException
+     * @throws TransformerConfigurationException
+     * @throws TransformerException
+     */
     public void porcentajesHtml(String archivo,String nombre) throws FileNotFoundException, TransformerConfigurationException, TransformerException {
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Source xslDoc = new StreamSource("archivos/asignaturahtml.xsl");
@@ -155,6 +216,14 @@ public class Serial {
         trasform.transform(xmlDoc, new StreamResult(docFile));
     }
     
+    /**
+     * Cargar un xml y transformarlo a Excel con los porcentajes de notas y Asistencia de cierto alumno
+     * @param archivo String con la ruta y nombre del archivo xml a cargar
+     * @param nombre Nombre del Alumno
+     * @throws FileNotFoundException
+     * @throws TransformerConfigurationException
+     * @throws TransformerException
+     */
     public void porcentajesExcel(String archivo,String nombre) throws FileNotFoundException, TransformerConfigurationException, TransformerException {
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Source xslDoc = new StreamSource("archivos/asignaturaexcel.xsl");
@@ -166,6 +235,13 @@ public class Serial {
         trasform.transform(xmlDoc, new StreamResult(docFile));
     }
     
+    /**
+     * Cargar un xml y transformarlo a Word con los Alumnos bajo cierto porcentaje de asistencia
+     * @param archivo String con la ruta y nombre del archivo xml a cargar
+     * @throws FileNotFoundException
+     * @throws TransformerConfigurationException
+     * @throws TransformerException
+     */
     public void asistenciaWord(String archivo) throws FileNotFoundException, TransformerConfigurationException, TransformerException {
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Source xslDoc = new StreamSource("archivos/asignaturaword.xsl");
@@ -177,6 +253,13 @@ public class Serial {
         trasform.transform(xmlDoc, new StreamResult(docFile));
     }
     
+    /**
+     * Cargar un xml y transformarlo a Html con los Alumnos bajo cierto porcentaje de asistencia
+     * @param archivo String con la ruta y nombre del archivo xml a cargar
+     * @throws FileNotFoundException
+     * @throws TransformerConfigurationException
+     * @throws TransformerException
+     */
     public void asistenciaHtml(String archivo) throws FileNotFoundException, TransformerConfigurationException, TransformerException {
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Source xslDoc = new StreamSource("archivos/asignaturahtml.xsl");
@@ -188,6 +271,13 @@ public class Serial {
         trasform.transform(xmlDoc, new StreamResult(docFile));
     }
     
+    /**
+     * Cargar un xml y transformarlo a Excel con los Alumnos bajo cierto porcentaje de asistencia
+     * @param archivo String con la ruta y nombre del archivo xml a cargar
+     * @throws FileNotFoundException
+     * @throws TransformerConfigurationException
+     * @throws TransformerException
+     */
     public void asistenciaExcel(String archivo) throws FileNotFoundException, TransformerConfigurationException, TransformerException {
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Source xslDoc = new StreamSource("archivos/asignaturaexcel.xsl");
@@ -199,6 +289,13 @@ public class Serial {
         trasform.transform(xmlDoc, new StreamResult(docFile));
     }
     
+    /**
+     * Cargar un xml y transformarlo a Word con los Alumnos en estado de Reprobación y la razón
+     * @param archivo String con la ruta y nombre del archivo xml a cargar
+     * @throws FileNotFoundException
+     * @throws TransformerConfigurationException
+     * @throws TransformerException
+     */
     public void reprobadosWord(String archivo) throws FileNotFoundException, TransformerConfigurationException, TransformerException {
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Source xslDoc = new StreamSource("archivos/asignaturaword.xsl");
@@ -210,6 +307,13 @@ public class Serial {
         trasform.transform(xmlDoc, new StreamResult(docFile));
     }
     
+    /**
+     * Cargar un xml y transformarlo a Html con los Alumnos en estado de Reprobación y la razón
+     * @param archivo String con la ruta y nombre del archivo xml a cargar
+     * @throws FileNotFoundException
+     * @throws TransformerConfigurationException
+     * @throws TransformerException
+     */
     public void reprobadosHtml(String archivo) throws FileNotFoundException, TransformerConfigurationException, TransformerException {
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Source xslDoc = new StreamSource("archivos/asignaturahtml.xsl");
@@ -221,6 +325,13 @@ public class Serial {
         trasform.transform(xmlDoc, new StreamResult(docFile));
     }
     
+    /**
+     * Cargar un xml y transformarlo a Excel con los Alumnos en estado de Reprobación y la razón
+     * @param archivo String con la ruta y nombre del archivo xml a cargar
+     * @throws FileNotFoundException
+     * @throws TransformerConfigurationException
+     * @throws TransformerException
+     */
     public void reprobadosExcel(String archivo) throws FileNotFoundException, TransformerConfigurationException, TransformerException {
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Source xslDoc = new StreamSource("archivos/asignaturaexcel.xsl");
@@ -232,6 +343,13 @@ public class Serial {
         trasform.transform(xmlDoc, new StreamResult(docFile));
     }
     
+    /**
+     * Cargar un xml y transformarlo a Word con los Apoderados con más de un hijo
+     * @param archivo String con la ruta y nombre del archivo xml a cargar
+     * @throws FileNotFoundException
+     * @throws TransformerConfigurationException
+     * @throws TransformerException
+     */
     public void apoderadosWord(String archivo) throws FileNotFoundException, TransformerConfigurationException, TransformerException {
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Source xslDoc = new StreamSource("archivos/asignaturaword.xsl");
@@ -243,6 +361,13 @@ public class Serial {
         trasform.transform(xmlDoc, new StreamResult(docFile));
     }
     
+    /**
+     * Cargar un xml y transformarlo a Html con los Apoderados con más de un hijo
+     * @param archivo String con la ruta y nombre del archivo xml a cargar
+     * @throws FileNotFoundException
+     * @throws TransformerConfigurationException
+     * @throws TransformerException
+     */
     public void apoderadosHtml(String archivo) throws FileNotFoundException, TransformerConfigurationException, TransformerException {
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Source xslDoc = new StreamSource("archivos/asignaturahtml.xsl");
@@ -254,12 +379,76 @@ public class Serial {
         trasform.transform(xmlDoc, new StreamResult(docFile));
     }
     
+    /**
+     * Cargar un xml y transformarlo a Excel con los Apoderados con más de un hijo
+     * @param archivo String con la ruta y nombre del archivo xml a cargar
+     * @throws FileNotFoundException
+     * @throws TransformerConfigurationException
+     * @throws TransformerException
+     */
     public void apoderadosExcel(String archivo) throws FileNotFoundException, TransformerConfigurationException, TransformerException {
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Source xslDoc = new StreamSource("archivos/asignaturaexcel.xsl");
         Source xmlDoc = new StreamSource("archivos/" + archivo + ".xml");
         archivo = archivo.substring(0, 14);
         String outputFileName = "archivos/" + archivo + "/reportes/apoderados.xls";
+        OutputStream docFile = new FileOutputStream(outputFileName);
+        Transformer trasform = tFactory.newTransformer(xslDoc);
+        trasform.transform(xmlDoc, new StreamResult(docFile));
+    }
+    
+    /**
+     * Cargar un xml y transformarlo a Word con la planificación de los hijos de cierto Apoderado
+     * @param archivo String con la ruta y nombre del archivo xml a cargar
+     * @param nombre Nombre del Apoderado
+     * @throws FileNotFoundException
+     * @throws TransformerConfigurationException
+     * @throws TransformerException
+     */
+    public void apoderadosWord(String archivo,String nombre) throws FileNotFoundException, TransformerConfigurationException, TransformerException {
+        TransformerFactory tFactory = TransformerFactory.newInstance();
+        Source xslDoc = new StreamSource("archivos/asignaturaword.xsl");
+        Source xmlDoc = new StreamSource("archivos/" + archivo + ".xml");
+        archivo = archivo.substring(0, 14);
+        String outputFileName = "archivos/" + archivo + "/reportes/reporteApoderado"+nombre+".doc";
+        OutputStream docFile = new FileOutputStream(outputFileName);
+        Transformer trasform = tFactory.newTransformer(xslDoc);
+        trasform.transform(xmlDoc, new StreamResult(docFile));
+    }
+    
+    /**
+     * Cargar un xml y transformarlo a Html con la planificación de los hijos de cierto Apoderado
+     * @param archivo String con la ruta y nombre del archivo xml a cargar
+     * @param nombre Nombre del Apoderado
+     * @throws FileNotFoundException
+     * @throws TransformerConfigurationException
+     * @throws TransformerException
+     */
+    public void apoderadosHtml(String archivo,String nombre) throws FileNotFoundException, TransformerConfigurationException, TransformerException {
+        TransformerFactory tFactory = TransformerFactory.newInstance();
+        Source xslDoc = new StreamSource("archivos/asignaturahtml.xsl");
+        Source xmlDoc = new StreamSource("archivos/" + archivo + ".xml");
+        archivo = archivo.substring(0, 14);
+        String outputFileName = "archivos/" + archivo + "/reportes/reporteApoderado"+nombre+".html";
+        OutputStream docFile = new FileOutputStream(outputFileName);
+        Transformer trasform = tFactory.newTransformer(xslDoc);
+        trasform.transform(xmlDoc, new StreamResult(docFile));
+    }
+    
+    /**
+     * Cargar un xml y transformarlo a Excel con la planificación de los hijos de cierto Apoderado
+     * @param archivo String con la ruta y nombre del archivo xml a cargar
+     * @param nombre Nombre del Apoderado
+     * @throws FileNotFoundException
+     * @throws TransformerConfigurationException
+     * @throws TransformerException
+     */
+    public void apoderadosExcel(String archivo,String nombre) throws FileNotFoundException, TransformerConfigurationException, TransformerException {
+        TransformerFactory tFactory = TransformerFactory.newInstance();
+        Source xslDoc = new StreamSource("archivos/asignaturaexcel.xsl");
+        Source xmlDoc = new StreamSource("archivos/" + archivo + ".xml");
+        archivo = archivo.substring(0, 14);
+        String outputFileName = "archivos/" + archivo + "/reportes/reporteApoderado"+nombre+".xls";
         OutputStream docFile = new FileOutputStream(outputFileName);
         Transformer trasform = tFactory.newTransformer(xslDoc);
         trasform.transform(xmlDoc, new StreamResult(docFile));

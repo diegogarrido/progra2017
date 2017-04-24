@@ -23,8 +23,6 @@ import org.json.JSONException;
 public class Reportes extends javax.swing.JFrame {
 
     private String curso;
-    private int index;
-    private String nombre;
     private Serial ser = new Serial();
 
     /**
@@ -34,11 +32,15 @@ public class Reportes extends javax.swing.JFrame {
         initComponents();
     }
 
-    public Reportes(String nombre, String curso, int index) {
+    /**
+     *
+     * @param nombre Nombre del a
+     * @param curso
+     * @param index
+     */
+    public Reportes(String curso) {
         initComponents();
         this.curso = curso;
-        this.index = index;
-        this.nombre = nombre;
     }
 
     /**
@@ -427,18 +429,41 @@ public class Reportes extends javax.swing.JFrame {
                 sel = "-1";
             }
             if (sel != "-1") {
-                int index;
-                int cont2=0;
-                for(int i=0;i<cur.getAlumnos().length;i++){
-                    if(cur.getAlumnos()[i].getApoderado().getNombre().contains(sel)){
-                        index=i;
+                int index = 0;
+                int cont2 = 0;
+                for (int i = 0; i < cur.getAlumnos().length; i++) {
+                    if (cur.getAlumnos()[i].getApoderado().getNombre().contains(sel)) {
+                        index = i;
                         cont2++;
                     }
                 }
                 ArrayList<String> array = new ArrayList();
-                array.add("");
+                array.add("Apoderado: " + sel);
+                array.add("Hijos:");
+                for (int i = 0; i < cur.getAlumnos()[index - cont2 + 1].getApoderado().getHijos().size(); i++) {
+                    array.add(cur.getAlumnos()[index - cont2 + 1].getNombre());
+                    for (int j = 0; j < cur.getAsignaturas().length; j++) {
+                        array.add(cur.getAsignaturas()[j].getNombre() + ":");
+                        array.add("Profesor: " + cur.getAsignaturas()[j].getProfesor());
+                        array.add("Nombre actividad-Fecha Actividad");
+                        for (int k = 0; k < cur.getAsignaturas()[j].getPlanificacion().length; k++) {
+                            array.add(cur.getAsignaturas()[j].getPlanificacion()[k].split(",")[0] + " - " + cur.getAsignaturas()[j].getPlanificacion()[k].split(",")[2]);
+                        }
+                    }
+                    cont2--;
+                    array.add(" ");
+                }
+                String str = curso.substring(0, 14);
+                ser.guardarGson(array, str + "/reportes/reporteApoderado" + sel);
+                ser.guardarXml(array, str + "/reportes/reporteApoderado" + sel);
+                ser.apoderadosExcel(str + "/reportes/reporteApoderado" + sel, sel);
+                ser.apoderadosHtml(str + "/reportes/reporteApoderado" + sel, sel);
+                ser.apoderadosWord(str + "/reportes/reporteApoderado" + sel, sel);
+                JOptionPane.showMessageDialog(null, "Documentos creados", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (FileNotFoundException ex) {
+            Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException | JSONException | TransformerException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_enviarActionPerformed

@@ -269,8 +269,7 @@ public final class Cursos extends javax.swing.JFrame {
                 letra = 'B';
             }
             try {
-                Notas not = new Notas();
-                not = new Notas(lista.getSelectedValue(), "cursos/curso" + (nivel.getSelectedIndex() + 1) + letra + "/curso" + (nivel.getSelectedIndex() + 1) + letra, lista.getSelectedIndex());
+                Notas not = new Notas(lista.getSelectedValue(), "cursos/curso" + (nivel.getSelectedIndex() + 1) + letra + "/curso" + (nivel.getSelectedIndex() + 1) + letra, lista.getSelectedIndex());
                 this.dispose();
                 not.setVisible(true);
             } catch (FileNotFoundException ex) {
@@ -287,7 +286,7 @@ public final class Cursos extends javax.swing.JFrame {
                 letra = 'B';
             }
         Reportes rep;
-        rep = new Reportes(lista.getSelectedValue(), "cursos/curso" + (nivel.getSelectedIndex() + 1) + letra + "/curso" + (nivel.getSelectedIndex() + 1) + letra, lista.getSelectedIndex());
+        rep = new Reportes("cursos/curso" + (nivel.getSelectedIndex() + 1) + letra + "/curso" + (nivel.getSelectedIndex() + 1) + letra);
         this.dispose();
         rep.setVisible(true);
     }//GEN-LAST:event_reportesActionPerformed
