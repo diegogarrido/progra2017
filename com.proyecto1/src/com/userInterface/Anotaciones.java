@@ -213,7 +213,7 @@ public final class Anotaciones extends javax.swing.JFrame {
             Serial ser = new Serial();
             try {
                 ser.guardarGson(cur, curso);
-                ser.guardarXml(Curso.class, curso);
+                ser.guardarXml(cur, curso);
             } catch (IOException | JSONException ex) {
                 Logger.getLogger(Anotaciones.class.getName()).log(Level.SEVERE, null, ex);
             }

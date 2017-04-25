@@ -6,7 +6,6 @@
 package com.userInterface;
 
 import com.archivos.Serial;
-import com.proyecto1.Asignatura;
 import com.proyecto1.Curso;
 import java.awt.Color;
 import java.io.FileNotFoundException;
