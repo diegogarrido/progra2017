@@ -17,10 +17,10 @@ import javax.swing.table.DefaultTableModel;
 import org.json.JSONException;
 
 /**
- *
+ * Ventana asistencia
  * @author Diego
  */
-public class Asistencia extends javax.swing.JFrame {
+public final class Asistencia extends javax.swing.JFrame {
 
     private String curso;
     private int index;
@@ -32,6 +32,12 @@ public class Asistencia extends javax.swing.JFrame {
         initComponents();
     }
 
+    /**
+     * Constructor
+     * @param nombre nombre del alumno
+     * @param curso curso del alumno
+     * @param index índice del alumno en el arraylist del curso
+     */
     public Asistencia(String nombre, String curso, int index) {
         initComponents();
         String text = jLabel1.getText();
@@ -228,6 +234,13 @@ public class Asistencia extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_siguienteActionPerformed
 
+    /**
+     * Cambiar el estado de la asistencia en el día selecionado
+     * @param in día seleccionado
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws JSONException
+     */
     public void cambiar(int in) throws FileNotFoundException, IOException, JSONException {
         Serial ser = new Serial();
         Curso cur = (Curso) ser.cargarGson(Curso.class, curso);
@@ -237,6 +250,10 @@ public class Asistencia extends javax.swing.JFrame {
         crearLista();
     }
 
+    /**
+     * Crearlista de asistencias
+     * @throws FileNotFoundException 
+     */
     private void crearLista() throws FileNotFoundException {
         String col[] = new String[]{"Día", "Asistencia"};
         Serial ser = new Serial();

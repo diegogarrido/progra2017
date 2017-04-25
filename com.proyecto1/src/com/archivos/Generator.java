@@ -6,12 +6,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import org.json.JSONException;
 
+/**
+ * Clase generadora de datos json y xml del curso
+ * @author Diego
+ */
 public class Generator {
 
     /**
-     *
+     * Generar
      * @param args
      * @throws IOException
+     * @throws org.json.JSONException
      */
     public static void main(String[] args) throws IOException, JSONException {
         Serial ser = new Serial();
@@ -144,8 +149,8 @@ public class Generator {
     }
 
     /**
-     *
-     * @param cur
+     * generar nombres de alunos y apoderados
+     * @param cur clase curso sin alumnos ni apoderados
      * @return una clase cursos con alumnos y apoderados random
      */
     public static Curso generarNombres(Curso cur) {
@@ -196,6 +201,10 @@ public class Generator {
         return cur;
     }
 
+    /**
+     * Generar nombres random de profesores
+     * @return array con nombres generados
+     */
     public static ArrayList<String> generarProf() {
         String[] nombres = new String[]{"Pedro", "Juan", "Diego", "Alberto", "Pablo", "Manuel", "Lorenzo", "Roberto", "Adrian", "Ana", "Martina", "Diana", "Carlos", "Daniel", "Arturo", "Alexis", "Belen", "Camila", "Daniela", "Valentina", "Sofia", "Florencia", "Francisca", "Fransisco", "Isidora", "Catalina", "Agustina", "Agustin", "Gonzalo", "Paz", "Rocio", "Julieta", "Renata", "Matilda", "Benjamin", "Vicente", "Martin", "Joaquin", "Jose", "Paulina", "Lucas", "Mateo", "Javier", "Emilio", "Santiago", "Esteban", "David"};
         String[] apellidos = new String[]{"Rodriguez", "Garrido", "Martines", "Rojas", "Plaza", "Toledo", "Ortiz", "Zapata", "Fierro", "Suazo", "Zuniga", "Ovalle", "Sanhueza", "Obreque", "Aguero", "Gonzales", "Munoz", "Diaz", "Vazques", "Perez", "Soto", "Contreras", "Lopez", "Mora", "Morales", "Fuentes", "Valenzuela", "Araya", "Sepulveda", "Espinoza", "Torres", "Castillo", "Castro", "Chavez", "Bravo", "Gomez", "Iturria", "Pereira", "Salinas", "Sanchez", "Ruiz", "Tapia"};

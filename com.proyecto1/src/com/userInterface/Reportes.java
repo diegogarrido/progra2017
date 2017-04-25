@@ -20,10 +20,10 @@ import org.json.JSONException;
  *
  * @author Diego
  */
-public class Reportes extends javax.swing.JFrame {
+public final class Reportes extends javax.swing.JFrame {
 
     private String curso;
-    private Serial ser = new Serial();
+    private final Serial ser = new Serial();
 
     /**
      * Creates new form Reporte
@@ -34,9 +34,7 @@ public class Reportes extends javax.swing.JFrame {
 
     /**
      *
-     * @param nombre Nombre del a
      * @param curso
-     * @param index
      */
     public Reportes(String curso) {
         initComponents();
@@ -205,6 +203,7 @@ public class Reportes extends javax.swing.JFrame {
                 ob[i] = cur.getProfesores().get(i);
             }
             int sel = JOptionPane.showOptionDialog(null, "Seleccione Profesor", "Selección", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, ob, 0);
+            
             String prof = cur.getProfesores().get(sel);
             if (prof != null) {
                 ArrayList<String> array = new ArrayList();

@@ -32,6 +32,13 @@ public final class Anotaciones extends javax.swing.JFrame {
         initComponents();
     }
 
+    /**
+     * Constructor
+     * @param nombre nombre del alumno
+     * @param curso curso del alumno
+     * @param index índice del alumno en el arraylist de su curso
+     * @throws FileNotFoundException
+     */
     public Anotaciones(String nombre, String curso, int index) throws FileNotFoundException {
         initComponents();
         String text = jLabel1.getText();
@@ -245,6 +252,10 @@ public final class Anotaciones extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Crear Lista de anotaciones
+     * @throws FileNotFoundException
+     */
     public void crearLista() throws FileNotFoundException {
         String col[] = new String[]{"Tipo", "Detalle"};
         String data[][] = new String[cur.getAlumnos()[index].getAnotaciones().size()][3];

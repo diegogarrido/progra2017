@@ -8,34 +8,73 @@ package com.proyecto1;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
+ * Junit de Alumno
  * @author Diego
  */
 public class AlumnoTest {
     
+    /**
+     *
+     */
     public AlumnoTest() {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() {
     }
     
+    /**
+     *
+     */
     @Before
     public void setUp() {
     }
     
+    /**
+     *
+     */
     @After
     public void tearDown() {
+    }
+
+    /**
+     * Test of getNotasAsig method, of class Alumno.
+     */
+    @Test
+    public void testGetNotasAsig() {
+        System.out.println("getNotasAsig");
+        Alumno instance = new Alumno();
+        String[] expResult = instance.getNotasAsig();
+        assertSame(expResult.length,25);
+    }
+
+    /**
+     * Test of setNotasAsig method, of class Alumno.
+     */
+    @Test
+    public void testSetNotasAsig() {
+        System.out.println("setNotasAsig");
+        String[] notasAsig = null;
+        Alumno instance = new Alumno();
+        instance.setNotasAsig(notasAsig);
+        Assert.assertArrayEquals(notasAsig, instance.getNotasAsig());
     }
 
     /**
@@ -44,12 +83,9 @@ public class AlumnoTest {
     @Test
     public void testGetAnotaciones() {
         System.out.println("getAnotaciones");
-        Alumno instance = null;
-        ArrayList<String> expResult = null;
+        Alumno instance = new Alumno();
         ArrayList<String> result = instance.getAnotaciones();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(new ArrayList<>(), result);
     }
 
     /**
@@ -59,10 +95,9 @@ public class AlumnoTest {
     public void testSetAnotaciones() {
         System.out.println("setAnotaciones");
         ArrayList<String> anotaciones = null;
-        Alumno instance = null;
+        Alumno instance = new Alumno();
         instance.setAnotaciones(anotaciones);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(anotaciones, instance.getAnotaciones());
     }
 
     /**
@@ -71,12 +106,9 @@ public class AlumnoTest {
     @Test
     public void testGetNotas() {
         System.out.println("getNotas");
-        Alumno instance = null;
-        String[] expResult = null;
+        Alumno instance = new Alumno();
         String[] result = instance.getNotas();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(25, result.length);
     }
 
     /**
@@ -86,10 +118,9 @@ public class AlumnoTest {
     public void testSetNotas() {
         System.out.println("setNotas");
         String[] notas = null;
-        Alumno instance = null;
+        Alumno instance = new Alumno();
         instance.setNotas(notas);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Assert.assertArrayEquals(notas,instance.getNotas());
     }
 
     /**
@@ -98,12 +129,9 @@ public class AlumnoTest {
     @Test
     public void testGetAsistencia() {
         System.out.println("getAsistencia");
-        Alumno instance = null;
-        boolean[] expResult = null;
+        Alumno instance = new Alumno();
         boolean[] result = instance.getAsistencia();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(30, result.length);
     }
 
     /**
@@ -113,10 +141,9 @@ public class AlumnoTest {
     public void testSetAsistencia() {
         System.out.println("setAsistencia");
         boolean[] asistencia = null;
-        Alumno instance = null;
+        Alumno instance = new Alumno();
         instance.setAsistencia(asistencia);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(asistencia,instance.getAsistencia());
     }
 
     /**
@@ -125,12 +152,10 @@ public class AlumnoTest {
     @Test
     public void testGetCurso() {
         System.out.println("getCurso");
-        Alumno instance = null;
-        String expResult = "";
+        Alumno instance = new Alumno("nombre","curso",new Apoderado());
+        String expResult = "curso";
         String result = instance.getCurso();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -139,11 +164,10 @@ public class AlumnoTest {
     @Test
     public void testSetCurso() {
         System.out.println("setCurso");
-        String curso = "";
-        Alumno instance = null;
+        String curso = "curso";
+        Alumno instance = new Alumno();
         instance.setCurso(curso);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(curso,instance.getCurso());
     }
 
     /**
@@ -152,12 +176,10 @@ public class AlumnoTest {
     @Test
     public void testGetApoderado() {
         System.out.println("getApoderado");
-        Alumno instance = null;
+        Alumno instance = new Alumno();
         Apoderado expResult = null;
         Apoderado result = instance.getApoderado();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -167,10 +189,33 @@ public class AlumnoTest {
     public void testSetApoderado() {
         System.out.println("setApoderado");
         Apoderado apoderado = null;
-        Alumno instance = null;
+        Alumno instance = new Alumno();
         instance.setApoderado(apoderado);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(apoderado,instance.getApoderado());
+    }
+
+    /**
+     * Test of getNombre method, of class Alumno.
+     */
+    @Test
+    public void testGetNombre() {
+        System.out.println("getNombre");
+        Alumno instance = new Alumno("nombre","curso",new Apoderado());
+        String expResult = "nombre";
+        String result = instance.getNombre();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of setNombre method, of class Alumno.
+     */
+    @Test
+    public void testSetNombre() {
+        System.out.println("setNombre");
+        String nombre = "nombre";
+        Alumno instance = new Alumno();
+        instance.setNombre(nombre);
+        assertEquals(nombre,instance.getNombre());
     }
 
     /**
@@ -179,12 +224,11 @@ public class AlumnoTest {
     @Test
     public void testGetPorcentajeAsistencia() {
         System.out.println("getPorcentajeAsistencia");
-        Alumno instance = null;
-        String expResult = "";
+        Alumno instance = new Alumno();
+        instance.setAsistencia(new boolean[]{true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,});
+        String expResult = "%50.0";
         String result = instance.getPorcentajeAsistencia();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -193,13 +237,13 @@ public class AlumnoTest {
     @Test
     public void testGetPromedioAsignatura() {
         System.out.println("getPromedioAsignatura");
-        int asignatura = 0;
-        Alumno instance = null;
-        String expResult = "";
+        int asignatura = 1;
+        Alumno instance = new Alumno();
+        instance.setNotas(new String[]{"4.0,20","6.0,20","3.5,20","5.2,20","3.5,20"});
+        String expResult = "4.4";
         String result = instance.getPromedioAsignatura(asignatura);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -208,12 +252,39 @@ public class AlumnoTest {
     @Test
     public void testGetPromedio() {
         System.out.println("getPromedio");
-        Alumno instance = null;
-        String expResult = "";
+        Alumno instance = new Alumno();
+        instance.setNotas(new String[]{"4.0,20","6.0,20","3.5,20","5.2,20","3.5,20,","4.0,20","6.0,20","3.5,20","5.2,20","3.5,20,","4.0,20","6.0,20","3.5,20","5.2,20","3.5,20,","4.0,20","6.0,20","3.5,20","5.2,20","3.5,20,","4.0,20","6.0,20","3.5,20","5.2,20","3.5,20,"});
+        String expResult = "4.4";
         String result = instance.getPromedio();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of estaReprobando method, of class Alumno.
+     */
+    @Test
+    public void testEstaReprobando() {
+        System.out.println("estaReprobando");
+        Alumno instance = new Alumno();
+        instance.setAsistencia(new boolean[]{true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,false,false,});
+        instance.setNotas(new String[]{"4.0,20","6.0,20","3.5,20","5.2,20","3.5,20,","4.0,20","6.0,20","3.5,20","5.2,20","3.5,20,","4.0,20","6.0,20","3.5,20","5.2,20","3.5,20,","4.0,20","6.0,20","3.5,20","5.2,20","3.5,20,","4.0,20","6.0,20","3.5,20","5.2,20","3.5,20,"});
+        boolean expResult = false;
+        boolean result = instance.estaReprobando();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of razonReprobado method, of class Alumno.
+     */
+    @Test
+    public void testRazonReprobado() {
+        System.out.println("razonReprobado");
+        Alumno instance = new Alumno();
+        instance.setAsistencia(new boolean[]{true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,});
+        instance.setNotas(new String[]{"4.0,20","6.0,20","3.5,20","5.2,20","3.5,20,","4.0,20","6.0,20","3.5,20","5.2,20","3.5,20,","4.0,20","6.0,20","3.5,20","5.2,20","3.5,20,","4.0,20","6.0,20","3.5,20","5.2,20","3.5,20,","4.0,20","6.0,20","3.5,20","5.2,20","3.5,20,"});
+        String expResult = "Porcentaje de Asistencia bajo %85";
+        String result = instance.razonReprobado();
+        assertEquals(expResult, result);
     }
     
 }

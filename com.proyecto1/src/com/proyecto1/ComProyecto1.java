@@ -5,17 +5,21 @@ package com.proyecto1;
  */
 import com.userInterface.Cursos;
 import java.io.FileNotFoundException;
+
 /**
- * @version 0.0.1
+ * Main del Programa
+ * @version 1.0.1
  * @author Diego Garrido
  */
 public class ComProyecto1 {
 
     /**
+     * Main del programa
+     *
      * @param args the command line arguments
      * @throws java.io.FileNotFoundException
      */
-    public static void main(String[] args) throws FileNotFoundException{
+    public static void main(String[] args) throws FileNotFoundException {
         Cursos cur = new Cursos();
         cur.setVisible(true);
     }

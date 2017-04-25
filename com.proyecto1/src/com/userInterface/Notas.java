@@ -17,10 +17,10 @@ import javax.swing.JOptionPane;
 import org.json.JSONException;
 
 /**
- *
+ * Ventana notas
  * @author Diego
  */
-public class Notas extends javax.swing.JFrame {
+public final class Notas extends javax.swing.JFrame {
 
     private String curso;
     private int index;
@@ -32,6 +32,13 @@ public class Notas extends javax.swing.JFrame {
         initComponents();
     }
 
+    /**
+     * Constructor
+     * @param nombre nombre del alumno
+     * @param curso curso del alumno
+     * @param index índice del alumno en el arraylist de su curso
+     * @throws FileNotFoundException
+     */
     public Notas(String nombre, String curso, int index) throws FileNotFoundException {
         initComponents();
         String text = jLabel1.getText();
