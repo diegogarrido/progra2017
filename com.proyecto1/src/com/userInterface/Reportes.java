@@ -203,30 +203,34 @@ public final class Reportes extends javax.swing.JFrame {
                 ob[i] = cur.getProfesores().get(i);
             }
             int sel = JOptionPane.showOptionDialog(null, "Seleccione Profesor", "Selección", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, ob, 0);
-            
-            String prof = cur.getProfesores().get(sel);
-            if (prof != null) {
-                ArrayList<String> array = new ArrayList();
-                array.add("Profesor: " + prof);
-                array.add("Asignatura: " + cur.getAsignaturas()[sel].getNombre());
-                array.add("Nombre alumno , Promedio en la asignatura");
-                array.add(" ");
-                for (int i = 0; i < cur.getAlumnos().length; i++) {
-                    array.add(cur.getAlumnos()[i].getNombre() + " " + cur.getAlumnos()[i].getPromedioAsignatura(sel + 1));
+            if ("" + sel == null) {
+                sel = -1;
+            }
+            if (sel != -1) {
+                String prof = cur.getProfesores().get(sel);
+                if (prof != null) {
+                    ArrayList<String> array = new ArrayList();
+                    array.add("Profesor: " + prof);
+                    array.add("Asignatura: " + cur.getAsignaturas()[sel].getNombre());
+                    array.add("Nombre alumno , Promedio en la asignatura");
+                    array.add(" ");
+                    for (int i = 0; i < cur.getAlumnos().length; i++) {
+                        array.add(cur.getAlumnos()[i].getNombre() + " " + cur.getAlumnos()[i].getPromedioAsignatura(sel + 1));
+                    }
+                    String str = curso.substring(0, 14);
+                    ser.guardarGson(array, str + "/reportes/asign" + prof);
+                    ser.guardarXml(array, str + "/reportes/asign" + prof);
+                    ser.asignaturaWord(str + "/reportes/asign" + prof, prof);
+                    ser.asignaturaHtml(str + "/reportes/asign" + prof, prof);
+                    ser.asignaturaExcel(str + "/reportes/asign" + prof, prof);
+                    JOptionPane.showMessageDialog(null, "Documentos creados", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
                 }
-                String str = curso.substring(0, 14);
-                ser.guardarGson(array, str + "/reportes/asign" + prof);
-                ser.guardarXml(array, str + "/reportes/asign" + prof);
-                ser.asignaturaWord(str + "/reportes/asign" + prof, prof);
-                ser.asignaturaHtml(str + "/reportes/asign" + prof, prof);
-                ser.asignaturaExcel(str + "/reportes/asign" + prof, prof);
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException | JSONException | TransformerException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Documentos creados", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_asignaturaActionPerformed
 
     private void porcentajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_porcentajesActionPerformed
