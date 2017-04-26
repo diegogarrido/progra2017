@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 
 /**
  * Main del Programa
- * @version 1.0.1
+ * @version 1.1.1
  * @author Diego Garrido
  */
 public class ComProyecto1 {

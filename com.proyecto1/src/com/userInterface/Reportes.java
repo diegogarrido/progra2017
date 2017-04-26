@@ -6,6 +6,8 @@
 package com.userInterface;
 
 import com.archivos.Serial;
+import com.proyecto1.Alumno;
+import com.proyecto1.Asignatura;
 import com.proyecto1.Curso;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,6 +19,7 @@ import javax.xml.transform.TransformerException;
 import org.json.JSONException;
 
 /**
+ * Ventana reportes
  *
  * @author Diego
  */
@@ -174,17 +177,25 @@ public final class Reportes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void planificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_planificacionActionPerformed
+        planificacion();
+    }//GEN-LAST:event_planificacionActionPerformed
+
+    private void planificacion() {
         try {
             ser.planificacionWord(curso);
             ser.planificacionHtml(curso);
             ser.planificacionExcel(curso);
+            JOptionPane.showMessageDialog(null, "Documentos creados, guardados como: Planific", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
         } catch (FileNotFoundException | TransformerException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Documentos creados", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_planificacionActionPerformed
+    }
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+        volver();
+    }//GEN-LAST:event_volverActionPerformed
+
+    private void volver() {
         try {
             Cursos cur = new Cursos();
             this.dispose();
@@ -192,10 +203,13 @@ public final class Reportes extends javax.swing.JFrame {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-    }//GEN-LAST:event_volverActionPerformed
+    }
 
     private void asignaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asignaturaActionPerformed
+        asignatura();
+    }//GEN-LAST:event_asignaturaActionPerformed
+
+    private void asignatura() {
         try {
             Curso cur = (Curso) ser.cargarGson(Curso.class, curso);
             Object[] ob = new Object[cur.getProfesores().size()];
@@ -214,8 +228,8 @@ public final class Reportes extends javax.swing.JFrame {
                     array.add("Asignatura: " + cur.getAsignaturas()[sel].getNombre());
                     array.add("Nombre alumno , Promedio en la asignatura");
                     array.add(" ");
-                    for (int i = 0; i < cur.getAlumnos().length; i++) {
-                        array.add(cur.getAlumnos()[i].getNombre() + " " + cur.getAlumnos()[i].getPromedioAsignatura(sel + 1));
+                    for (Alumno alumno : cur.getAlumnos()) {
+                        array.add(alumno.getNombre() + " " + alumno.getPromedioAsignatura(sel + 1));
                     }
                     String str = curso.substring(0, 14);
                     ser.guardarGson(array, str + "/reportes/asign" + prof);
@@ -223,7 +237,7 @@ public final class Reportes extends javax.swing.JFrame {
                     ser.asignaturaWord(str + "/reportes/asign" + prof, prof);
                     ser.asignaturaHtml(str + "/reportes/asign" + prof, prof);
                     ser.asignaturaExcel(str + "/reportes/asign" + prof, prof);
-                    JOptionPane.showMessageDialog(null, "Documentos creados", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Documentos creados, guardados como: asign" + prof, "Confirmación", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         } catch (FileNotFoundException ex) {
@@ -231,9 +245,13 @@ public final class Reportes extends javax.swing.JFrame {
         } catch (IOException | JSONException | TransformerException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_asignaturaActionPerformed
+    }
 
     private void porcentajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_porcentajesActionPerformed
+        porcentaje();
+    }//GEN-LAST:event_porcentajesActionPerformed
+
+    private void porcentaje() {
         try {
             Curso cur = (Curso) ser.cargarGson(Curso.class, curso);
             String[] ob = new String[cur.getAlumnos().length];
@@ -284,7 +302,7 @@ public final class Reportes extends javax.swing.JFrame {
                             rojos++;
                         }
                     }
-                    array.add("Nota: " + cur.getAlumnos()[se].getNotas()[i].split(",")[0] + " Ponderacion: %" + cur.getAlumnos()[se].getNotas()[i].split(",")[1]);
+                    array.add("Nota: " + cur.getAlumnos()[se].getNotas()[i].split(",")[0] + " Ponderacion: " + cur.getAlumnos()[se].getNotas()[i].split(",")[1] + "%");
                 }
                 array.add("Promedio General: " + cur.getAlumnos()[se].getPromedio());
                 array.add("Promedios rojos: " + rojos);
@@ -299,16 +317,20 @@ public final class Reportes extends javax.swing.JFrame {
                 ser.porcentajesWord(str + "/reportes/reporteAlumno" + sel, sel);
                 ser.porcentajesExcel(str + "/reportes/reporteAlumno" + sel, sel);
                 ser.porcentajesHtml(str + "/reportes/reporteAlumno" + sel, sel);
-                JOptionPane.showMessageDialog(null, "Documentos creados", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Documentos creados, guardados como: reporteAlumno" + sel, "Confirmación", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException | JSONException | TransformerException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_porcentajesActionPerformed
+    }
 
     private void asistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asistenciaActionPerformed
+        asistencia();
+    }//GEN-LAST:event_asistenciaActionPerformed
+
+    private void asistencia() {
         try {
             Curso cur = (Curso) ser.cargarGson(Curso.class, curso);
             String por = "-1";
@@ -332,7 +354,7 @@ public final class Reportes extends javax.swing.JFrame {
             } while (por.length() == 0);
             if (!por.contains("-1")) {
                 ArrayList<String> array = new ArrayList();
-                array.add("Alumnos del curso " + cur.getNivel() + cur.getLetra() + " con porcentaje de asistencia bajo %" + porc);
+                array.add("Alumnos del curso " + cur.getNivel() + cur.getLetra() + " con porcentaje de asistencia bajo " + porc + "%");
                 for (int i = 0; i < cur.getAlumnos().length; i++) {
                     if (Double.parseDouble(cur.getAlumnos()[i].getPorcentajeAsistencia().replaceAll("%", "")) < porc) {
                         array.add(cur.getAlumnos()[i].getNombre() + " con " + cur.getAlumnos()[i].getPorcentajeAsistencia());
@@ -344,16 +366,20 @@ public final class Reportes extends javax.swing.JFrame {
                 ser.asistenciaWord(str + "/reportes/reporteAsistencia");
                 ser.asistenciaExcel(str + "/reportes/reporteAsistencia");
                 ser.asistenciaHtml(str + "/reportes/reporteAsistencia");
-                JOptionPane.showMessageDialog(null, "Documentos creados", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Documentos creados, guardados como: reporteAsistenia", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException | JSONException | TransformerException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_asistenciaActionPerformed
+    }
 
     private void reprobadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reprobadosActionPerformed
+        reprobados();
+    }//GEN-LAST:event_reprobadosActionPerformed
+
+    private void reprobados() {
         try {
             Curso cur = (Curso) ser.cargarGson(Curso.class, curso);
             ArrayList<String> array = new ArrayList();
@@ -369,27 +395,31 @@ public final class Reportes extends javax.swing.JFrame {
             ser.reprobadosExcel(str + "/reportes/reprobados");
             ser.reprobadosHtml(str + "/reportes/reprobados");
             ser.reprobadosWord(str + "/reportes/reprobados");
-            JOptionPane.showMessageDialog(null, "Documentos creados", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Documentos creados, guardados como: reprobados", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException | JSONException | TransformerException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_reprobadosActionPerformed
+    }
 
     private void alumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alumnosActionPerformed
+        alumnos();
+    }//GEN-LAST:event_alumnosActionPerformed
+
+    private void alumnos() {
         try {
             Curso cur = (Curso) ser.cargarGson(Curso.class, curso);
             ArrayList<String> array = new ArrayList();
             array.add("Apoderados con mas de un hijo en el colegio: ");
             String exis = "";
-            for (int i = 0; i < cur.getAlumnos().length; i++) {
-                if (cur.getAlumnos()[i].getApoderado().getHijos().size() > 1 && !exis.contains(cur.getAlumnos()[i].getNombre().split(" ")[0])) {
-                    array.add("Nombre: " + cur.getAlumnos()[i].getApoderado().getNombre());
+            for (Alumno alumno : cur.getAlumnos()) {
+                if (alumno.getApoderado().getHijos().size() > 1 && !exis.contains(alumno.getNombre().split(" ")[0])) {
+                    array.add("Nombre: " + alumno.getApoderado().getNombre());
                     array.add("Hijos: ");
-                    array.add(cur.getAlumnos()[i].getApoderado().getHijos().toString().replaceAll("\\[", "").replaceAll("\\]", ""));
+                    array.add(alumno.getApoderado().getHijos().toString().replaceAll("\\[", "").replaceAll("\\]", ""));
                     array.add(" ");
-                    exis += cur.getAlumnos()[i].getNombre().split(" ")[0];
+                    exis += alumno.getNombre().split(" ")[0];
                 }
             }
             String str = curso.substring(0, 14);
@@ -398,33 +428,37 @@ public final class Reportes extends javax.swing.JFrame {
             ser.apoderadosExcel(str + "/reportes/apoderados");
             ser.apoderadosHtml(str + "/reportes/apoderados");
             ser.apoderadosWord(str + "/reportes/apoderados");
-            JOptionPane.showMessageDialog(null, "Documentos creados", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Documentos creados, guardados como: apoderados", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException | JSONException | TransformerException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_alumnosActionPerformed
+    }
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
+        enviar();
+    }//GEN-LAST:event_enviarActionPerformed
+
+    private void enviar() {
         try {
             Curso cur = (Curso) ser.cargarGson(Curso.class, curso);
             int cont = 0;
             String exis = "";
-            for (int i = 0; i < cur.getAlumnos().length; i++) {
-                if (!exis.contains(cur.getAlumnos()[i].getNombre().split(" ")[0])) {
+            for (Alumno alumno : cur.getAlumnos()) {
+                if (!exis.contains(alumno.getNombre().split(" ")[0])) {
                     cont++;
-                    exis += cur.getAlumnos()[i].getNombre().split(" ")[0];
+                    exis += alumno.getNombre().split(" ")[0];
                 }
             }
             Object[] ob = new Object[cont];
             cont = 0;
             exis = "";
-            for (int i = 0; i < cur.getAlumnos().length; i++) {
-                if (!exis.contains(cur.getAlumnos()[i].getNombre().split(" ")[0])) {
-                    ob[cont] = cur.getAlumnos()[i].getApoderado().getNombre();
+            for (Alumno alumno : cur.getAlumnos()) {
+                if (!exis.contains(alumno.getNombre().split(" ")[0])) {
+                    ob[cont] = alumno.getApoderado().getNombre();
                     cont++;
-                    exis += cur.getAlumnos()[i].getNombre().split(" ")[0];
+                    exis += alumno.getNombre().split(" ")[0];
                 }
             }
             String sel = (String) JOptionPane.showInputDialog(null, "Seleccione apoderado para crear reporte(s)", "Selección", JOptionPane.QUESTION_MESSAGE, null, ob, 0);
@@ -445,12 +479,12 @@ public final class Reportes extends javax.swing.JFrame {
                 array.add("Hijos:");
                 for (int i = 0; i < cur.getAlumnos()[index - cont2 + 1].getApoderado().getHijos().size(); i++) {
                     array.add(cur.getAlumnos()[index - cont2 + 1].getNombre());
-                    for (int j = 0; j < cur.getAsignaturas().length; j++) {
-                        array.add(cur.getAsignaturas()[j].getNombre() + ":");
-                        array.add("Profesor: " + cur.getAsignaturas()[j].getProfesor());
+                    for (Asignatura asignatura1 : cur.getAsignaturas()) {
+                        array.add(asignatura1.getNombre() + ":");
+                        array.add("Profesor: " + asignatura1.getProfesor());
                         array.add("Nombre actividad-Fecha Actividad");
-                        for (int k = 0; k < cur.getAsignaturas()[j].getPlanificacion().length; k++) {
-                            array.add(cur.getAsignaturas()[j].getPlanificacion()[k].split(",")[0] + " - " + cur.getAsignaturas()[j].getPlanificacion()[k].split(",")[2]);
+                        for (String planificacion1 : asignatura1.getPlanificacion()) {
+                            array.add(planificacion1.split(",")[0] + " - " + planificacion1.split(",")[2]);
                         }
                     }
                     cont2--;
@@ -462,14 +496,14 @@ public final class Reportes extends javax.swing.JFrame {
                 ser.apoderadosExcel(str + "/reportes/reporteApoderado" + sel, sel);
                 ser.apoderadosHtml(str + "/reportes/reporteApoderado" + sel, sel);
                 ser.apoderadosWord(str + "/reportes/reporteApoderado" + sel, sel);
-                JOptionPane.showMessageDialog(null, "Documentos creados", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Documentos creados, guardados como: reporteApoderado" + sel, "Confirmación", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException | JSONException | TransformerException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_enviarActionPerformed
+    }
 
     /**
      * @param args the command line arguments

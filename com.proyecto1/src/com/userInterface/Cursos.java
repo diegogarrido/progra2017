@@ -13,8 +13,9 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- * Ventana cursos
- * Si se mantiene el click izquierdo sobre un alumno se muestra un popup con su apoderado y sus hijos
+ * Ventana cursos Si se mantiene el click izquierdo sobre un alumno se muestra
+ * un popup con su apoderado y sus hijos
+ *
  * @author Diego
  */
 public final class Cursos extends javax.swing.JFrame {
@@ -210,6 +211,10 @@ public final class Cursos extends javax.swing.JFrame {
     }//GEN-LAST:event_abMouseClicked
 
     private void asistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asistenciaActionPerformed
+        asistencia();
+    }//GEN-LAST:event_asistenciaActionPerformed
+
+    private void asistencia() {
         if (lista.getSelectedValue() == null) {
             JOptionPane.showMessageDialog(null, "Seleccione un alumno", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -223,9 +228,13 @@ public final class Cursos extends javax.swing.JFrame {
             this.dispose();
             asis.setVisible(true);
         }
-    }//GEN-LAST:event_asistenciaActionPerformed
-
+    }
+    
     private void anotacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anotacionesActionPerformed
+        anotaciones();
+    }//GEN-LAST:event_anotacionesActionPerformed
+
+    private void anotaciones(){
         if (lista.getSelectedValue() == null) {
             JOptionPane.showMessageDialog(null, "Seleccione un alumno", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -244,8 +253,8 @@ public final class Cursos extends javax.swing.JFrame {
                 Logger.getLogger(Cursos.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }//GEN-LAST:event_anotacionesActionPerformed
-
+    }
+    
     private void listaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaMouseReleased
         if (evt.getButton() == (java.awt.event.MouseEvent.BUTTON1)) {
             popup.setVisible(false);
@@ -260,6 +269,10 @@ public final class Cursos extends javax.swing.JFrame {
     }//GEN-LAST:event_listaMousePressed
 
     private void notasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notasActionPerformed
+        notas();
+    }//GEN-LAST:event_notasActionPerformed
+
+    private void notas(){
         if (lista.getSelectedValue() == null) {
             JOptionPane.showMessageDialog(null, "Seleccione un alumno", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -277,21 +290,25 @@ public final class Cursos extends javax.swing.JFrame {
                 Logger.getLogger(Cursos.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }//GEN-LAST:event_notasActionPerformed
-
+    }
+    
     private void reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportesActionPerformed
+        reportes();
+    }//GEN-LAST:event_reportesActionPerformed
+
+    private void reportes(){
         char letra;
-            if (ab.getValue() == 0) {
-                letra = 'A';
-            } else {
-                letra = 'B';
-            }
+        if (ab.getValue() == 0) {
+            letra = 'A';
+        } else {
+            letra = 'B';
+        }
         Reportes rep;
         rep = new Reportes("cursos/curso" + (nivel.getSelectedIndex() + 1) + letra + "/curso" + (nivel.getSelectedIndex() + 1) + letra);
         this.dispose();
         rep.setVisible(true);
-    }//GEN-LAST:event_reportesActionPerformed
-
+    }
+    
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_salirActionPerformed
@@ -299,7 +316,7 @@ public final class Cursos extends javax.swing.JFrame {
     /**
      * Crear Popup de apoderados con sus hijos
      */
-    public void crearPopup() {
+    private void crearPopup() {
         if (lista.getSelectedIndex() != -1) {
             Serial ser = new Serial();
             char letra;
@@ -326,7 +343,7 @@ public final class Cursos extends javax.swing.JFrame {
      *
      * @throws FileNotFoundException
      */
-    public void crearLista() throws FileNotFoundException {
+    private void crearLista() throws FileNotFoundException {
         char letra;
         if (ab.getValue() == 0) {
             letra = 'A';

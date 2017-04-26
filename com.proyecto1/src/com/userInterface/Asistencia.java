@@ -18,6 +18,7 @@ import org.json.JSONException;
 
 /**
  * Ventana asistencia
+ *
  * @author Diego
  */
 public final class Asistencia extends javax.swing.JFrame {
@@ -34,6 +35,7 @@ public final class Asistencia extends javax.swing.JFrame {
 
     /**
      * Constructor
+     *
      * @param nombre nombre del alumno
      * @param curso curso del alumno
      * @param index índice del alumno en el arraylist del curso
@@ -132,6 +134,25 @@ public final class Asistencia extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 32, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(111, 111, 111))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(cambiar)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(anterior)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(siguiente)))
+                                .addGap(18, 18, 18))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(volver)
@@ -139,25 +160,7 @@ public final class Asistencia extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(box, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                        .addComponent(cambiar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(anterior)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(siguiente)
-                                .addGap(18, 18, 18))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(111, 111, 111)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -176,10 +179,9 @@ public final class Asistencia extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
-                        .addComponent(box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(volver)
-                        .addComponent(cambiar)))
+                        .addComponent(box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cambiar))
+                    .addComponent(volver))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -187,6 +189,10 @@ public final class Asistencia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+        volver();
+    }//GEN-LAST:event_volverActionPerformed
+
+    private void volver() {
         try {
             Cursos cur = new Cursos();
             this.dispose();
@@ -194,9 +200,13 @@ public final class Asistencia extends javax.swing.JFrame {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Asistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_volverActionPerformed
+    }
 
     private void cambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarActionPerformed
+        cambiar();
+    }//GEN-LAST:event_cambiarActionPerformed
+
+    private void cambiar() {
         try {
             if (tabla.getSelectedRow() == -1) {
                 JOptionPane.showMessageDialog(null, "Seleccione un día para cambiar", "Error", JOptionPane.ERROR_MESSAGE);
@@ -208,40 +218,49 @@ public final class Asistencia extends javax.swing.JFrame {
         } catch (IOException | JSONException ex) {
             Logger.getLogger(Asistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_cambiarActionPerformed
+    }
 
     private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
-        Serial ser = new Serial();
-        try {
-            Curso cur = (Curso) ser.cargarGson(Curso.class, curso);
-            Asistencia asis = new Asistencia(cur.getAlumnos()[index-1].getNombre(),curso,index-1);
-            this.dispose();
-            asis.setVisible(true);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Asistencia.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        anterior();
     }//GEN-LAST:event_anteriorActionPerformed
 
-    private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
+    private void anterior() {
         Serial ser = new Serial();
         try {
             Curso cur = (Curso) ser.cargarGson(Curso.class, curso);
-            Asistencia asis = new Asistencia(cur.getAlumnos()[index+1].getNombre(),curso,index+1);
+            Asistencia asis = new Asistencia(cur.getAlumnos()[index - 1].getNombre(), curso, index - 1);
             this.dispose();
             asis.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Asistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_siguienteActionPerformed
+    }
 
+    private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
+        siguiente();
+    }//GEN-LAST:event_siguienteActionPerformed
+    
+    private void siguiente(){
+        Serial ser = new Serial();
+        try {
+            Curso cur = (Curso) ser.cargarGson(Curso.class, curso);
+            Asistencia asis = new Asistencia(cur.getAlumnos()[index + 1].getNombre(), curso, index + 1);
+            this.dispose();
+            asis.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Asistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     /**
      * Cambiar el estado de la asistencia en el día selecionado
+     *
      * @param in día seleccionado
      * @throws FileNotFoundException
      * @throws IOException
      * @throws JSONException
      */
-    public void cambiar(int in) throws FileNotFoundException, IOException, JSONException {
+    private void cambiar(int in) throws FileNotFoundException, IOException, JSONException {
         Serial ser = new Serial();
         Curso cur = (Curso) ser.cargarGson(Curso.class, curso);
         cur.getAlumnos()[index].getAsistencia()[in] = !cur.getAlumnos()[index].getAsistencia()[in];
@@ -252,7 +271,8 @@ public final class Asistencia extends javax.swing.JFrame {
 
     /**
      * Crearlista de asistencias
-     * @throws FileNotFoundException 
+     *
+     * @throws FileNotFoundException
      */
     private void crearLista() throws FileNotFoundException {
         String col[] = new String[]{"Día", "Asistencia"};
@@ -282,7 +302,7 @@ public final class Asistencia extends javax.swing.JFrame {
         } else {
             siguiente.setEnabled(true);
         }
-        if (Double.parseDouble(cur.getAlumnos()[index].getPorcentajeAsistencia().replaceAll("%","")) < 85) {
+        if (Double.parseDouble(cur.getAlumnos()[index].getPorcentajeAsistencia().replaceAll("%", "")) < 85) {
             box.setForeground(new Color(255, 0, 0));
         } else {
             box.setForeground(new Color(0, 0, 0));

@@ -19,7 +19,7 @@ import java.io.IOException;
  *
  * @author Diego
  */
-public class Serial {
+public final class Serial {
 
     Gson gson = new Gson();
 

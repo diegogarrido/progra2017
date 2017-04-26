@@ -34,6 +34,7 @@ public final class Anotaciones extends javax.swing.JFrame {
 
     /**
      * Constructor
+     *
      * @param nombre nombre del alumno
      * @param curso curso del alumno
      * @param index índice del alumno en el arraylist de su curso
@@ -175,6 +176,10 @@ public final class Anotaciones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+        volver();
+    }//GEN-LAST:event_volverActionPerformed
+
+    private void volver() {
         Cursos cur;
         try {
             cur = new Cursos();
@@ -183,7 +188,7 @@ public final class Anotaciones extends javax.swing.JFrame {
             Logger.getLogger(Anotaciones.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
-    }//GEN-LAST:event_volverActionPerformed
+    }
 
     private void positivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_positivaActionPerformed
         try {
@@ -202,29 +207,35 @@ public final class Anotaciones extends javax.swing.JFrame {
     }//GEN-LAST:event_negativaActionPerformed
 
     private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
-        if(tabla.getSelectedRow()!=-1){
-        String str = cur.getAlumnos()[index].getAnotaciones().get(tabla.getSelectedRow()).split(",")[0];
-        while (str.length() < 9) {
-            str = str.replaceAll(",", "");
-            str += "," + JOptionPane.showInputDialog(null, "Reingrese Detalle de la anotación", "Editar " + str, JOptionPane.QUESTION_MESSAGE);
-        }
-        if (!str.contains("null")) {
-            cur.getAlumnos()[index].getAnotaciones().set(tabla.getSelectedRow(), str);
-            Serial ser = new Serial();
-            try {
-                ser.guardarGson(cur, curso);
-                ser.guardarXml(cur, curso);
-            } catch (IOException | JSONException ex) {
-                Logger.getLogger(Anotaciones.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                crearLista();
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(Anotaciones.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        }else{JOptionPane.showMessageDialog(null,"Seleccione una anotación","Error",JOptionPane.ERROR_MESSAGE);}
+        editar();
     }//GEN-LAST:event_editarActionPerformed
+
+    private void editar() {
+        if (tabla.getSelectedRow() != -1) {
+            String str = cur.getAlumnos()[index].getAnotaciones().get(tabla.getSelectedRow()).split(",")[0];
+            while (str.length() < 9) {
+                str = str.replaceAll(",", "");
+                str += "," + JOptionPane.showInputDialog(null, "Reingrese Detalle de la anotación", "Editar " + str, JOptionPane.QUESTION_MESSAGE);
+            }
+            if (!str.contains("null")) {
+                cur.getAlumnos()[index].getAnotaciones().set(tabla.getSelectedRow(), str);
+                Serial ser = new Serial();
+                try {
+                    ser.guardarGson(cur, curso);
+                    ser.guardarXml(cur, curso);
+                } catch (IOException | JSONException ex) {
+                    Logger.getLogger(Anotaciones.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    crearLista();
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(Anotaciones.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione una anotación", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     private void añadir(String tipo) throws JSONException {
         String str = "";
@@ -254,9 +265,10 @@ public final class Anotaciones extends javax.swing.JFrame {
 
     /**
      * Crear Lista de anotaciones
+     *
      * @throws FileNotFoundException
      */
-    public void crearLista() throws FileNotFoundException {
+    private void crearLista() throws FileNotFoundException {
         String col[] = new String[]{"Tipo", "Detalle"};
         String data[][] = new String[cur.getAlumnos()[index].getAnotaciones().size()][3];
         for (int i = 0; i < cur.getAlumnos()[index].getAnotaciones().size(); i++) {

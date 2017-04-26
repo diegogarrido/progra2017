@@ -3,7 +3,9 @@ package com.proyecto1;
 import java.util.ArrayList;
 
 /**
- * Clase Alumno las notas se guardan en el formato "nota,ponderacion" ej: notas[0]="5.5,50"
+ * Clase Alumno las notas se guardan en el formato "nota,ponderacion" ej:
+ * notas[0]="5.5,50"
+ *
  * @author Diego
  */
 public class Alumno {
@@ -18,6 +20,7 @@ public class Alumno {
 
     /**
      * Constructor
+     *
      * @param nombre Nombre del alumno
      * @param curso Curso al que pertenece
      * @param apoderado Apoderado
@@ -36,6 +39,7 @@ public class Alumno {
 
     /**
      * Retorna Un arreglo con las notas de actividades de las asignaturas
+     *
      * @return notas de una asignatura
      */
     public String[] getNotasAsig() {
@@ -43,7 +47,8 @@ public class Alumno {
     }
 
     /**
-     * @param notasAsig Un arreglo con las notas de actividades de las asignaturas
+     * @param notasAsig Un arreglo con las notas de actividades de las
+     * asignaturas
      */
     public void setNotasAsig(String[] notasAsig) {
         this.notasAsig = notasAsig;
@@ -52,16 +57,18 @@ public class Alumno {
     /**
      * GetAnotaciones
      *
-     * @return arrayList con las anotaciones en formato (tipo,detalle) ej: "Positiva,Se porta bien"
+     * @return arrayList con las anotaciones en formato (tipo,detalle) ej:
+     * "Positiva,Se porta bien"
      */
     public ArrayList<String> getAnotaciones() {
         return this.anotaciones;
     }
 
     /**
-     * SetAnotaciones 
-     * 
-     * @param anotaciones arrayList con las anotaciones en formato (tipo,detalle) ej: "Positiva,Se porta bien"
+     * SetAnotaciones
+     *
+     * @param anotaciones arrayList con las anotaciones en formato
+     * (tipo,detalle) ej: "Positiva,Se porta bien"
      */
     public void setAnotaciones(ArrayList<String> anotaciones) {
         this.anotaciones = anotaciones;
@@ -70,7 +77,8 @@ public class Alumno {
     /**
      * GetNotas
      *
-     * @return array con las notas que se promedian de las asignaturas en el formato (nota,ponderacion) ej: "4.0,60"
+     * @return array con las notas que se promedian de las asignaturas en el
+     * formato (nota,ponderacion) ej: "4.0,60"
      */
     public String[] getNotas() {
         return notas;
@@ -79,7 +87,8 @@ public class Alumno {
     /**
      * SetNotas
      *
-     * @param notas array con las notas que se promedian de las asignaturas en el formato (nota,ponderacion) ej: "4.0,60"
+     * @param notas array con las notas que se promedian de las asignaturas en
+     * el formato (nota,ponderacion) ej: "4.0,60"
      */
     public void setNotas(String[] notas) {
         this.notas = notas;
@@ -88,7 +97,8 @@ public class Alumno {
     /**
      * GetAsistencia
      *
-     * @return array de booleanos con las asistencias, true si asistió, false si no.
+     * @return array de booleanos con las asistencias, true si asistió, false si
+     * no.
      */
     public boolean[] getAsistencia() {
         return asistencia;
@@ -97,7 +107,8 @@ public class Alumno {
     /**
      * SetAsistencia
      *
-     * @param asistencia array de booleanos con las asistencias, true si asistió, false si no.
+     * @param asistencia array de booleanos con las asistencias, true si
+     * asistió, false si no.
      */
     public void setAsistencia(boolean[] asistencia) {
         this.asistencia = asistencia;
@@ -141,6 +152,7 @@ public class Alumno {
 
     /**
      * GetNombre
+     *
      * @return String con el nombre del alumno (apellido nombre)
      */
     public String getNombre() {
@@ -149,6 +161,7 @@ public class Alumno {
 
     /**
      * SetNombre
+     *
      * @param nombre String con el nombre del alumno (apellido nombre)
      */
     public void setNombre(String nombre) {
@@ -161,7 +174,7 @@ public class Alumno {
      * @return porcentaje de asistencia
      */
     public String getPorcentajeAsistencia() {
-        String por = "%";
+        String por;
         int cont = 0;
         for (int i = 0; i < this.asistencia.length; i++) {
             if (this.asistencia[i]) {
@@ -169,7 +182,7 @@ public class Alumno {
             }
         }
         double calc = (cont * 100) / 30;
-        por += calc;
+        por = "" + calc + "%";
         return por;
     }
 
@@ -252,15 +265,15 @@ public class Alumno {
         if (cont == 2 && Double.parseDouble(getPromedio()) < 4.5) {
             str = "Dos promedios rojos y promedio general bajo 4.5";
             if (Double.parseDouble(getPorcentajeAsistencia().replaceAll("%", "")) < 85) {
-                str += ", además de tener un Porcentaje de Asistencia bajo %85";
+                str += ", además de tener un Porcentaje de Asistencia bajo 85%";
             }
         } else if (cont >= 3) {
             str = "Más de dos promedios rojos";
             if (Double.parseDouble(getPorcentajeAsistencia().replaceAll("%", "")) < 85) {
-                str += " y Porcentaje de Asistencia bajo %85";
+                str += " y Porcentaje de Asistencia bajo 85%";
             }
         } else if (Double.parseDouble(getPorcentajeAsistencia().replaceAll("%", "")) < 85) {
-            str = "Porcentaje de Asistencia bajo %85";
+            str = "Porcentaje de Asistencia bajo 85%";
         }
         return str;
     }

@@ -17,6 +17,7 @@ import org.json.JSONException;
 
 /**
  * Ventana notas
+ *
  * @author Diego
  */
 public final class Notas extends javax.swing.JFrame {
@@ -33,6 +34,7 @@ public final class Notas extends javax.swing.JFrame {
 
     /**
      * Constructor
+     *
      * @param nombre nombre del alumno
      * @param curso curso del alumno
      * @param index índice del alumno en el arraylist de su curso
@@ -213,6 +215,10 @@ public final class Notas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+        volver();
+    }//GEN-LAST:event_volverActionPerformed
+
+    private void volver() {
         Cursos cur;
         try {
             cur = new Cursos();
@@ -221,17 +227,25 @@ public final class Notas extends javax.swing.JFrame {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Notas.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_volverActionPerformed
+    }
 
     private void asignaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asignaturaActionPerformed
+        asignatura();
+    }//GEN-LAST:event_asignaturaActionPerformed
+
+    private void asignatura() {
         try {
             crearTabla();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Notas.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_asignaturaActionPerformed
+    }
 
     private void actividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actividadActionPerformed
+        actividad();
+    }//GEN-LAST:event_actividadActionPerformed
+
+    private void actividad() {
         try {
             if (tabla.getSelectedRow() != -1) {
                 Serial ser = new Serial();
@@ -369,9 +383,13 @@ public final class Notas extends javax.swing.JFrame {
         } catch (IOException | JSONException ex) {
             Logger.getLogger(Notas.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_actividadActionPerformed
+    }
 
     private void notaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notaActionPerformed
+        nota();
+    }//GEN-LAST:event_notaActionPerformed
+
+    private void nota() {
         if (tabla.getSelectedRow() != -1) {
             try {
                 Serial ser = new Serial();
@@ -453,9 +471,13 @@ public final class Notas extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione una actividad", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_notaActionPerformed
+    }
 
     private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
+        anterior();
+    }//GEN-LAST:event_anteriorActionPerformed
+
+    private void anterior() {
         Serial ser = new Serial();
         try {
             Curso cur = (Curso) ser.cargarGson(Curso.class, curso);
@@ -465,9 +487,13 @@ public final class Notas extends javax.swing.JFrame {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Asistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_anteriorActionPerformed
+    }
 
     private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
+        siguiente();
+    }//GEN-LAST:event_siguienteActionPerformed
+
+    private void siguiente(){
         Serial ser = new Serial();
         try {
             Curso cur = (Curso) ser.cargarGson(Curso.class, curso);
@@ -477,8 +503,8 @@ public final class Notas extends javax.swing.JFrame {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Asistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_siguienteActionPerformed
-
+    }
+    
     private void crearTabla() throws FileNotFoundException {
         Serial ser = new Serial();
         Curso cur = (Curso) ser.cargarGson(Curso.class, curso);
@@ -491,7 +517,7 @@ public final class Notas extends javax.swing.JFrame {
             col[i][0] = cur.getAsignaturas()[asignatura.getSelectedIndex()].getPlanificacion()[i].split(",")[0];
             if (cur.getAsignaturas()[asignatura.getSelectedIndex()].getPlanificacion()[i].split(",")[1].contains("true")) {
                 col[i][1] = cur.getAlumnos()[index].getNotas()[mul + cont].split(",")[0];
-                col[i][2] = "%" + cur.getAlumnos()[index].getNotas()[mul + cont].split(",")[1];
+                col[i][2] = cur.getAlumnos()[index].getNotas()[mul + cont].split(",")[1]+"%";
                 pond += Integer.parseInt(cur.getAlumnos()[index].getNotas()[mul + cont].split(",")[1]);
                 cont++;
             }
