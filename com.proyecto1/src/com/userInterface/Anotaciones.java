@@ -70,6 +70,8 @@ public final class Anotaciones extends javax.swing.JFrame {
         editar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        siguiente = new javax.swing.JButton();
+        anterior = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
@@ -122,6 +124,20 @@ public final class Anotaciones extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Registro de Anotaciones");
 
+        siguiente.setText("→");
+        siguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                siguienteActionPerformed(evt);
+            }
+        });
+
+        anterior.setText("←");
+        anterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anteriorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,22 +157,26 @@ public final class Anotaciones extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(69, 69, 69))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(jLabel4)))
+                        .addComponent(anterior)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addGap(32, 32, 32)
+                        .addComponent(siguiente))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
-                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(siguiente)
+                    .addComponent(anterior))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -209,6 +229,30 @@ public final class Anotaciones extends javax.swing.JFrame {
     private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
         editar();
     }//GEN-LAST:event_editarActionPerformed
+
+    private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
+        Serial ser = new Serial();
+        try {
+            Curso cur = (Curso) ser.cargarGson(Curso.class, curso);
+            Anotaciones anot = new Anotaciones(cur.getAlumnos()[index - 1].getNombre(), curso, index - 1);
+            this.dispose();
+            anot.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Asistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_anteriorActionPerformed
+
+    private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
+        Serial ser = new Serial();
+        try {
+            Curso cur = (Curso) ser.cargarGson(Curso.class, curso);
+            Anotaciones anot = new Anotaciones(cur.getAlumnos()[index + 1].getNombre(), curso, index + 1);
+            this.dispose();
+            anot.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Asistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_siguienteActionPerformed
 
     private void editar() {
         if (tabla.getSelectedRow() != -1) {
@@ -277,6 +321,16 @@ public final class Anotaciones extends javax.swing.JFrame {
         }
         DefaultTableModel def = new DefaultTableModel(data, col);
         tabla.setModel(def);
+        if (index == 0) {
+            anterior.setEnabled(false);
+        } else {
+            anterior.setEnabled(true);
+        }
+        if (index == cur.getAlumnos().length - 1) {
+            siguiente.setEnabled(false);
+        } else {
+            siguiente.setEnabled(true);
+        }
     }
 
     /**
@@ -309,6 +363,7 @@ public final class Anotaciones extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton anterior;
     private javax.swing.JButton editar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -317,6 +372,7 @@ public final class Anotaciones extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton negativa;
     private javax.swing.JButton positiva;
+    private javax.swing.JButton siguiente;
     private javax.swing.JTable tabla;
     private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables

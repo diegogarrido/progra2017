@@ -411,7 +411,7 @@ public final class Reportes extends javax.swing.JFrame {
         try {
             Curso cur = (Curso) ser.cargarGson(Curso.class, curso);
             ArrayList<String> array = new ArrayList();
-            array.add("Apoderados con mas de un hijo en el colegio: ");
+            array.add("Apoderados con mas de un hijo en el curso " + cur.getNivel() + cur.getLetra() + ": ");
             String exis = "";
             for (Alumno alumno : cur.getAlumnos()) {
                 if (alumno.getApoderado().getHijos().size() > 1 && !exis.contains(alumno.getNombre().split(" ")[0])) {

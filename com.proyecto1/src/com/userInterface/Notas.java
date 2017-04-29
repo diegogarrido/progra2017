@@ -8,6 +8,8 @@ package com.userInterface;
 import com.archivos.Serial;
 import com.proyecto1.Curso;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -24,6 +26,7 @@ public final class Notas extends javax.swing.JFrame {
 
     private String curso;
     private int index;
+    private boolean salir = true;
 
     /**
      * Creates new form Notas
@@ -73,8 +76,13 @@ public final class Notas extends javax.swing.JFrame {
         siguiente = new javax.swing.JButton();
         anterior = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Notas del Alumno: ");
 
@@ -219,13 +227,17 @@ public final class Notas extends javax.swing.JFrame {
     }//GEN-LAST:event_volverActionPerformed
 
     private void volver() {
-        Cursos cur;
-        try {
-            cur = new Cursos();
-            this.dispose();
-            cur.setVisible(true);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Notas.class.getName()).log(Level.SEVERE, null, ex);
+        if (salir) {
+            Cursos cur;
+            try {
+                cur = new Cursos();
+                this.dispose();
+                cur.setVisible(true);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Notas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "La Ponderación total debe ser de 100", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -493,7 +505,11 @@ public final class Notas extends javax.swing.JFrame {
         siguiente();
     }//GEN-LAST:event_siguienteActionPerformed
 
-    private void siguiente(){
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        volver();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void siguiente() {
         Serial ser = new Serial();
         try {
             Curso cur = (Curso) ser.cargarGson(Curso.class, curso);
@@ -504,7 +520,7 @@ public final class Notas extends javax.swing.JFrame {
             Logger.getLogger(Asistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private void crearTabla() throws FileNotFoundException {
         Serial ser = new Serial();
         Curso cur = (Curso) ser.cargarGson(Curso.class, curso);
@@ -517,7 +533,7 @@ public final class Notas extends javax.swing.JFrame {
             col[i][0] = cur.getAsignaturas()[asignatura.getSelectedIndex()].getPlanificacion()[i].split(",")[0];
             if (cur.getAsignaturas()[asignatura.getSelectedIndex()].getPlanificacion()[i].split(",")[1].contains("true")) {
                 col[i][1] = cur.getAlumnos()[index].getNotas()[mul + cont].split(",")[0];
-                col[i][2] = cur.getAlumnos()[index].getNotas()[mul + cont].split(",")[1]+"%";
+                col[i][2] = cur.getAlumnos()[index].getNotas()[mul + cont].split(",")[1] + "%";
                 pond += Integer.parseInt(cur.getAlumnos()[index].getNotas()[mul + cont].split(",")[1]);
                 cont++;
             }
@@ -531,8 +547,13 @@ public final class Notas extends javax.swing.JFrame {
         jLabel5.setText("Ponderación total: " + pond);
         if (pond < 100 || pond > 100) {
             jLabel5.setForeground(new Color(255, 0, 0));
+            salir = false;
         } else {
             jLabel5.setForeground(new Color(0, 0, 0));
+            salir = false;
+        }
+        if(pond == 100){
+            salir=true;
         }
         jLabel6.setText("Promedio de la Asignatura: " + cur.getAlumnos()[index].getPromedioAsignatura(asignatura.getSelectedIndex() + 1));
         double nota = Double.parseDouble(cur.getAlumnos()[index].getPromedioAsignatura(asignatura.getSelectedIndex() + 1));
