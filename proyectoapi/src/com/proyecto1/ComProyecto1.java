@@ -3,6 +3,7 @@ package com.proyecto1;
 import com.archivos.Database;
 import java.io.IOException;
 import org.json.JSONException;
+import ormsamples.CreateProyecto1DatabaseSchema;
 
 /**
  * Proyecto 1 programación avanzada 2017 1er semestre Gestión de colegio básico
@@ -24,6 +25,7 @@ public class ComProyecto1 {
      * @param args the command line arguments
      */
     public static void main(String[] args){
+        CreateProyecto1DatabaseSchema.main(args);
         Database data = new Database();
         //Serial ser = new Serial();
         data.deleteData();

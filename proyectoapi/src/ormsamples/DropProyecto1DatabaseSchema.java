@@ -4,7 +4,6 @@
  */
 package ormsamples;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import org.orm.*;
 
