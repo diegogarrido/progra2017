@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import ormsamples.CreateProyecto1DatabaseSchema;
 
 /**
  *
@@ -140,6 +141,19 @@ public class DatabaseTest {
         boolean existprof = false;
         Database instance = new Database();
         instance.addAsignatura(as, existprof);
+    }
+
+    /**
+     * Test of estadoTablas method, of class Database.
+     */
+    @Test
+    public void testEstadoTablas() {
+        System.out.println("estadoTablas");
+        Database instance = new Database();
+        String[] args=null;
+        CreateProyecto1DatabaseSchema.main(args);
+        boolean result = instance.estadoTablas();
+        assertTrue(result);
     }
     
 }

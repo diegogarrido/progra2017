@@ -6,14 +6,9 @@
 package com.userInterface;
 
 import com.archivos.Database;
-import com.archivos.Serial;
 import com.proyecto1.Curso;
 import com.proyecto1.Profesor;
 import java.awt.Color;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;

@@ -5,17 +5,11 @@ package com.userInterface;
 
 import com.archivos.Database;
 import com.archivos.Generator;
-import com.archivos.Serial;
 import com.proyecto1.Curso;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.orm.PersistentException;
+import ormsamples.CreateProyecto1DatabaseSchema;
 
 /**
+ * Pantalla de carga que genera un nuevo poblamiento inicial de cursos
  *
  * @author Diego
  */
@@ -62,7 +56,6 @@ public class Carga extends javax.swing.JFrame implements Runnable {
 
         jLabel1.setText("Espere, por favor");
 
-        proceso.setText("Procesos");
         proceso.setName(""); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -75,19 +68,19 @@ public class Carga extends javax.swing.JFrame implements Runnable {
                         .addGap(100, 100, 100)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
+                        .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(barra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(barra, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
                             .addComponent(proceso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(proceso)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(proceso, javax.swing.GroupLayout.DEFAULT_SIZE, 14, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(barra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -98,44 +91,36 @@ public class Carga extends javax.swing.JFrame implements Runnable {
 
     private void cargar() {
         this.setLocationRelativeTo(null);
-        /*proceso.setText("Borrando archivos cursos locales...");
-        try {
-            Runtime.getRuntime().exec("archivos/cursos/borrar.bat /K start");
-        } catch (IOException ex) {
-            Logger.getLogger(Carga.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        barra.setValue(10);*/
-        proceso.setText("Generando nuevos cursos...");
-        Generator gen = new Generator();
-        gen.generar();
-        barra.setValue(15);
         Database dat = new Database();
-        dat.deleteData();
-        Serial ser = new Serial();
+        Generator gen = new Generator();
+        proceso.setText("Limpiando base de datos...");
+        String[] args = null;
+        if (dat.estadoTablas()) {
+            dat.deleteData();
+        } else {
+            CreateProyecto1DatabaseSchema.main(args);
+        }
+        barra.setValue(5);
         proceso.setText("Actualizando base de datos...");
         for (int i = 1; i < 17; i++) {
-            String letra = "A";
+            char letra = 'A';
             int nivel = i;
             if (i > 8) {
+                letra = 'B';
                 nivel -= 8;
-                letra = "B";
             }
-            String archivo = "cursos/curso" + nivel + letra + "/curso" + nivel + letra;
-            try {
-                Curso cur = (Curso) ser.cargarGson(Curso.class, archivo);
-                dat.uploadData(cur);
-                proceso.setText("Curso " + cur.getNivel() + cur.getLetra() + " guardado!");
-                barra.setValue(barra.getValue() + 5);
-            } catch (Exception ex) {
-                Logger.getLogger(Carga.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            proceso.setText("Generando nuevo curso " + nivel + letra + "...");
+            Curso cur = gen.generar(i);
+            barra.setValue(barra.getValue() + 3);
+            proceso.setText("Subiendo curso " + nivel + letra + " a base de datos...");
+            dat.uploadData(cur);
+            proceso.setText("Curso " + cur.getNivel() + cur.getLetra() + " guardado!");
+            barra.setValue(barra.getValue() + 3);
         }
         proceso.setText("Finalizado!");
-        barra.setValue(6100);
-        Cursos cur;
-        cur = new Cursos(false);
+        barra.setValue(100);
+        Cursos cur = new Cursos(false);
         cur.setVisible(true);
-        this.dispose();
         this.dispose();
     }
 

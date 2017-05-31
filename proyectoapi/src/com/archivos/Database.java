@@ -3,6 +3,12 @@ package com.archivos;
 import java.util.ArrayList;
 import ormsamples.*;
 import com.proyecto1.*;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.orm.PersistentException;
@@ -14,6 +20,7 @@ import org.orm.PersistentException;
 public class Database {
 
     Serial ser = new Serial();
+    
 
     /**
      * Constructor
@@ -21,6 +28,27 @@ public class Database {
     public Database() {
     }
 
+    /**
+     * Verificar que existen las 5 tablas de la base de datos:
+     * alumno, apoderado, asignatura, curso, profesor
+     * @return true: existen. false: faltan 1 o mas.
+     */
+    public boolean estadoTablas(){
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyecto1?&useSSL=false", "root", "admin");
+            int cont=0;
+            DatabaseMetaData md = con.getMetaData();
+            ResultSet rs = md.getTables(null, null, "%", null);
+            while (rs.next()) {
+                cont++;
+            }
+            if(cont==5){return true;}
+        } catch (ClassNotFoundException | SQLException ex) {
+        }
+        return false;
+    }
+    
     /**
      * Borrar todos los datos de todas las tablas de la base de datos
      */
@@ -51,6 +79,7 @@ public class Database {
      * (este método se utiliza sólo en el Main de la capa de negocios que realiza 
      * el poblamiento inicial y lo sube, en caso de haber dañado los datos en la base de datos
      * utilizar este Main)
+     * @deprecated 
      */
     public void uploadData() {
         CreateProyecto1Data c = new CreateProyecto1Data();

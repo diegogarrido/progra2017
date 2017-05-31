@@ -50,14 +50,14 @@ public class RetrieveAndUpdateProyecto1Data {
             }
             indexes.clear();
             orm.Asignatura[] lormAsignaturas = orm.AsignaturaDAO.listAsignaturaByQuery(null,null);
+            String c =""+lormCursos[idcur].getNivel()+" "+lormCursos[idcur].getLetra();
             for(int i=0;i<lormAsignaturas.length;i++){
-                String c =""+lormAsignaturas[i].getCursoid_fk().getNivel()+lormAsignaturas[i].getCursoid_fk().getLetra();
-                if(c.equals(lormCursos[idcur].getNivel()+lormCursos[idcur].getLetra())){
+                if(lormAsignaturas[i].getNombre().contains(c)){
                     indexes.add(i);
                 }
             }
             for (int i = 0; i < indexes.size(); i++) {
-                orm.Asignatura lormAsignatura = orm.AsignaturaDAO.loadAsignaturaByORMID(indexes.get(i));
+                orm.Asignatura lormAsignatura = lormAsignaturas[indexes.get(i)];
                 lormAsignatura.setPlanificacion(ser.serializar(cur.getAsignaturas().get(i).getPlanificacion()));
                 lormAsignatura.getProfesorid_id_fk().setAsignaturas(ser.serializar(cur.getAsignaturas().get(i).getProfesor().getAsignaturas()));
                 orm.AsignaturaDAO.save(lormAsignatura);

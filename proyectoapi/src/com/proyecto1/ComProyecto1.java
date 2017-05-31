@@ -25,11 +25,11 @@ public class ComProyecto1 {
      * @param args the command line arguments
      */
     public static void main(String[] args){
-        CreateProyecto1DatabaseSchema.main(args);
-        Database data = new Database();
+        //CreateProyecto1DatabaseSchema.main(args);
+        //Database data = new Database();
         //Serial ser = new Serial();
-        data.deleteData();
-        data.uploadData();
+        //data.deleteData();
+        //data.uploadData();
         //data.retrieveData();
         //Curso cur = (Curso) ser.cargarGson(Curso.class, "cursos/curso1A/curso1A");
         //["6.7,14", "3.4,5", "4.9,13", "2.5,6", "3.6,62", "6.6,10", "2.6,14", "1.1,11", "1.0,2", "3.3,63", "5.9,13", "3.5,4", "1.0,1", "4.9,18", "4.2,64", "2.5,6", "2.6,17", "6.4,10", "4.7,3", "3.2,64", "1.3,5", "3.6,12", "5.9,16", "1.0,5", "3.5,62"]

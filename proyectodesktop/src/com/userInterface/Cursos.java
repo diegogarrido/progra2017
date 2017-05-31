@@ -6,8 +6,6 @@
 package com.userInterface;
 
 import com.archivos.Database;
-import com.archivos.Generator;
-import com.archivos.Serial;
 import com.proyecto1.Apoderado;
 import com.proyecto1.Curso;
 import java.io.FileNotFoundException;
@@ -25,24 +23,39 @@ import org.orm.PersistentException;
  */
 public final class Cursos extends javax.swing.JFrame {
 
-    private boolean gen;
+    private final boolean gen;
 
     /**
      * Creates new form Cursos
      *
      */
     public Cursos() {
-        this.gen=true;
-        initComponents();
-        crearLista();
-        this.setLocationRelativeTo(null);
+        this.gen = true;
         Database dat = new Database();
-        ArrayList<String> letras = dat.existCurso(nivel.getSelectedIndex() + 1);
-        String[] model = new String[letras.size()];
-        for (int i = 0; i < letras.size(); i++) {
-            model[i] = letras.get(i);
+        if (dat.estadoTablas()) {
+            int size=0;
+            try {
+                Curso cur = dat.retrieveCurso("1 A");
+                size=cur.getAlumnos().size();
+            } catch (PersistentException ex) {
+                
+            }
+            if(size!=0){
+            initComponents();
+            crearLista();
+            this.setLocationRelativeTo(null);
+            ArrayList<String> letras = dat.existCurso(nivel.getSelectedIndex() + 1);
+            String[] model = new String[letras.size()];
+            for (int i = 0; i < letras.size(); i++) {
+                model[i] = letras.get(i);
+            }
+            ab.setModel(new javax.swing.DefaultComboBoxModel<>(model));
+            }else{
+                cargar();
+            }
+        } else {
+            cargar();
         }
-        ab.setModel(new javax.swing.DefaultComboBoxModel<>(model));
     }
 
     public Cursos(boolean gen) {
@@ -372,9 +385,16 @@ public final class Cursos extends javax.swing.JFrame {
     }//GEN-LAST:event_salirActionPerformed
 
     private void generarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarActionPerformed
-        new Thread(new Carga()).start();
+        this.setVisible(false);
         this.dispose();
+        cargar();
     }//GEN-LAST:event_generarActionPerformed
+
+    private void cargar() {
+        this.setVisible(false);
+        this.dispose();
+        new Thread(new Carga()).start();
+    }
 
     private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed
         añadir();
@@ -522,7 +542,7 @@ public final class Cursos extends javax.swing.JFrame {
             list[i] = (cur.getAlumnos().get(i).getNombre());
         }
         lista.setListData(list);
-        if(cur.getAlumnos().size()==0){
+        if (cur.getAlumnos().size() == 0) {
             reportes.setEnabled(false);
         }
     }

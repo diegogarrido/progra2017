@@ -24,24 +24,24 @@ License Type: Academic
 				&#160;nombre del alumno
 			</meta>
 		</property>
-		<property name="asistencia" column="asistencia" type="string" length="250" not-null="false" lazy="false">
+		<property name="asistencia" column="asistencia" type="string" length="400" not-null="false" lazy="false">
 			<meta attribute="field-description">
 				registro asistencia del alumno
-			</meta>
-		</property>
-		<property name="notas" column="notas" type="string" length="600" not-null="false" lazy="false">
-			<meta attribute="field-description">
-				notas de asignatura que van al promedio
-			</meta>
-		</property>
-		<property name="notasAsig" column="notasAsig" type="string" length="600" not-null="false" lazy="false">
-			<meta attribute="field-description">
-				notas de taller por asignatura que se promedian para una nota de asignatura
 			</meta>
 		</property>
 		<property name="anotaciones" column="anotaciones" type="string" length="500" not-null="false" lazy="false">
 			<meta attribute="field-description">
 				registro anotaciones del alumno
+			</meta>
+		</property>
+		<property name="notas" column="notas" type="string" length="1000" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				notas de asignatura que van al promedio
+			</meta>
+		</property>
+		<property name="notasAsig" column="notasAsig" type="string" length="1000" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				notas de taller por asignatura que se promedian para una nota de asignatura
 			</meta>
 		</property>
 	</class>

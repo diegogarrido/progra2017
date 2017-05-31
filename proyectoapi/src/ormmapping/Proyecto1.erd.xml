@@ -67,36 +67,12 @@
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>false</ForeignKey>
       <Type>27</Type>
-      <Length>250</Length>
+      <Length>400</Length>
       <Nullable>true</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
       <Comment>registro asistencia del alumno</Comment>
-      <UserTypes/>
-    </Column>
-    <Column name="notas">
-      <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
-      <Type>27</Type>
-      <Length>600</Length>
-      <Nullable>true</Nullable>
-      <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <Comment>notas de asignatura que van al promedio</Comment>
-      <UserTypes/>
-    </Column>
-    <Column name="notasAsig">
-      <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
-      <Type>27</Type>
-      <Length>600</Length>
-      <Nullable>true</Nullable>
-      <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <Comment>notas de taller por asignatura que se promedian para una nota de asignatura</Comment>
       <UserTypes/>
     </Column>
     <Column name="anotaciones">
@@ -109,6 +85,30 @@
       <Unique>false</Unique>
       <Index>false</Index>
       <Comment>registro anotaciones del alumno</Comment>
+      <UserTypes/>
+    </Column>
+    <Column name="notas">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>27</Type>
+      <Length>1000</Length>
+      <Nullable>true</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <Comment>notas de asignatura que van al promedio</Comment>
+      <UserTypes/>
+    </Column>
+    <Column name="notasAsig">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>27</Type>
+      <Length>1000</Length>
+      <Nullable>true</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <Comment>notas de taller por asignatura que se promedian para una nota de asignatura</Comment>
       <UserTypes/>
     </Column>
   </Entity>
@@ -202,7 +202,7 @@
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>false</ForeignKey>
       <Type>27</Type>
-      <Length>500</Length>
+      <Length>700</Length>
       <Nullable>true</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>

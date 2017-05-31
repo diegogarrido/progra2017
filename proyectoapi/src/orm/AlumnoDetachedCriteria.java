@@ -27,9 +27,9 @@ public class AlumnoDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final StringExpression curso;
 	public final StringExpression nombre;
 	public final StringExpression asistencia;
+	public final StringExpression anotaciones;
 	public final StringExpression notas;
 	public final StringExpression notasAsig;
-	public final StringExpression anotaciones;
 	
 	public AlumnoDetachedCriteria() {
 		super(orm.Alumno.class, orm.AlumnoCriteria.class);
@@ -41,9 +41,9 @@ public class AlumnoDetachedCriteria extends AbstractORMDetachedCriteria {
 		curso = new StringExpression("curso", this.getDetachedCriteria());
 		nombre = new StringExpression("nombre", this.getDetachedCriteria());
 		asistencia = new StringExpression("asistencia", this.getDetachedCriteria());
+		anotaciones = new StringExpression("anotaciones", this.getDetachedCriteria());
 		notas = new StringExpression("notas", this.getDetachedCriteria());
 		notasAsig = new StringExpression("notasAsig", this.getDetachedCriteria());
-		anotaciones = new StringExpression("anotaciones", this.getDetachedCriteria());
 	}
 	
 	public AlumnoDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -56,9 +56,9 @@ public class AlumnoDetachedCriteria extends AbstractORMDetachedCriteria {
 		curso = new StringExpression("curso", this.getDetachedCriteria());
 		nombre = new StringExpression("nombre", this.getDetachedCriteria());
 		asistencia = new StringExpression("asistencia", this.getDetachedCriteria());
+		anotaciones = new StringExpression("anotaciones", this.getDetachedCriteria());
 		notas = new StringExpression("notas", this.getDetachedCriteria());
 		notasAsig = new StringExpression("notasAsig", this.getDetachedCriteria());
-		anotaciones = new StringExpression("anotaciones", this.getDetachedCriteria());
 	}
 	
 	public ApoderadoDetachedCriteria createApoderado_id_fkCriteria() {

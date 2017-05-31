@@ -27,9 +27,9 @@ public class AlumnoCriteria extends AbstractORMCriteria {
 	public final StringExpression curso;
 	public final StringExpression nombre;
 	public final StringExpression asistencia;
+	public final StringExpression anotaciones;
 	public final StringExpression notas;
 	public final StringExpression notasAsig;
-	public final StringExpression anotaciones;
 	
 	public AlumnoCriteria(Criteria criteria) {
 		super(criteria);
@@ -41,9 +41,9 @@ public class AlumnoCriteria extends AbstractORMCriteria {
 		curso = new StringExpression("curso", this);
 		nombre = new StringExpression("nombre", this);
 		asistencia = new StringExpression("asistencia", this);
+		anotaciones = new StringExpression("anotaciones", this);
 		notas = new StringExpression("notas", this);
 		notasAsig = new StringExpression("notasAsig", this);
-		anotaciones = new StringExpression("anotaciones", this);
 	}
 	
 	public AlumnoCriteria(PersistentSession session) {

@@ -8,12 +8,8 @@ import java.sql.SQLException;
 import org.orm.*;
 
 /**
- * Crear tablas de la base de datos
- * Alumno
- * Apoderado
- * Asignatura
- * Curso
- * Profesor
+ * Crear tablas de la base de datos Alumno Apoderado Asignatura Curso Profesor
+ *
  * @author Diego
  */
 public class CreateProyecto1DatabaseSchema {

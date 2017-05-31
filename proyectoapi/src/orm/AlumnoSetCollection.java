@@ -74,9 +74,9 @@ public class AlumnoSetCollection extends org.orm.util.ORMSet {
 	 * <li>curso</li>
 	 * <li>nombre</li>
 	 * <li>asistencia</li>
+	 * <li>anotaciones</li>
 	 * <li>notas</li>
 	 * <li>notasAsig</li>
-	 * <li>anotaciones</li>
 	 * </ul>
 	 * @return The persistent objects sorted array
 	 */
@@ -91,9 +91,9 @@ public class AlumnoSetCollection extends org.orm.util.ORMSet {
 	 * <li>curso</li>
 	 * <li>nombre</li>
 	 * <li>asistencia</li>
+	 * <li>anotaciones</li>
 	 * <li>notas</li>
 	 * <li>notasAsig</li>
-	 * <li>anotaciones</li>
 	 * </ul>
 	 * @param ascending true for ascending, false for descending
 	 * @return The persistent objects sorted array

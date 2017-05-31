@@ -19,7 +19,7 @@ License Type: Academic
 				nombre de la asignatura
 			</meta>
 		</property>
-		<property name="planificacion" column="planificacion" type="string" length="500" not-null="false" lazy="false">
+		<property name="planificacion" column="planificacion" type="string" length="700" not-null="false" lazy="false">
 			<meta attribute="field-description">
 				planificacion de la asignatura
 			</meta>

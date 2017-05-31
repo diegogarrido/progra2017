@@ -46,11 +46,11 @@ public class Alumno {
 	
 	private String asistencia;
 	
+	private String anotaciones;
+	
 	private String notas;
 	
 	private String notasAsig;
-	
-	private String anotaciones;
 	
 	/**
 	 * alumno primary key

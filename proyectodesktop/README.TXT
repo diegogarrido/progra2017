@@ -2,4 +2,5 @@ Ventanas del proyecto colegio
 
 Utilizar base de datos: /proyecto1
 
-Ejecutar el Main de colegioapi.jar para crear las tablas y subir el poblamiento inicial
+La ventana principal verificará que existan las tablas necesarias
+de no existir las creará y hará el poblamiento inicial
